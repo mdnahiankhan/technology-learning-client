@@ -8,7 +8,7 @@ const Main = () => {
         <div>
             <Header></Header>
             <div className='grid grid-cols-3'>
-                <div className='col-span-1'>
+                <div className=' col-span-1'>
                     <Leftside></Leftside>
                 </div>
                 <div className='col-span-2'>

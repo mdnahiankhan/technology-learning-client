@@ -16,7 +16,7 @@ const Leftside = () => {
 
 
     return (
-        <div>
+        <div className='mx-20'>
             <h1>All catagories: {categories?.length}</h1>
             <div>
                 {
