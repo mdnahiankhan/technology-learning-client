@@ -1,12 +1,15 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
-    const { googleLogin } = useContext(AuthContext);
+    const [error, setError] = useState('')
 
+    const { googleLogin, SigninUser } = useContext(AuthContext);
+    const navigate = useNavigate()
     const googleprovider = new GoogleAuthProvider()
 
     const handleGooglsignin = () => {
@@ -14,8 +17,29 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user);
+                navigate('/');
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
+    }
+    const handleSignin = event => {
+        event.preventDefault()
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        SigninUser(email, password)
+            .then(result => {
+                const user = result.user
+                event.target.reset();
+                console.log(user);
+                setError('')
+                navigate('/');
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
     }
 
     return (
@@ -28,7 +52,6 @@ const Login = () => {
                 <div className="my-6 space-y-4">
                     <button onClick={handleGooglsignin} aria-label="Login with Google" type="button" className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-current">
-
                         </svg>
                         <p>Login with Google</p>
                     </button>
@@ -43,21 +66,17 @@ const Login = () => {
                     <p className="px-3 dark:text-gray-400">OR</p>
                     <hr className="w-full dark:text-gray-400" />
                 </div>
-                <form novalidate="" action="" className="space-y-8 ng-untouched ng-pristine ng-valid">
-                    <div className="space-y-4">
-                        <div className="space-y-2">
-                            <label for="email" className="block text-sm">Email address</label>
-                            <input type="email" name="email" id="email" placeholder="leroy@jenkins.com" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
-                        </div>
-                        <div className="space-y-2">
-                            <div className="flex justify-between">
-                                <label for="password" className="text-sm">Password</label>
-                                <Link rel="noopener noreferrer" href="#" className="text-xs hover:underline dark:text-gray-400">Forgot password?</Link>
-                            </div>
-                            <input type="password" name="password" id="password" placeholder="*****" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
-                        </div>
+                <form onSubmit={handleSignin} className="space-y-12">
+                    <div>
+                        <label htmlFor="">Enter Your email</label>
+                        <input type="text" name='email' placeholder="enter your email" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
-                    <button type="button" className="w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 dark:text-gray-900">Sign in</button>
+                    <div>
+                        <label htmlFor="">Password</label>
+                        <input type="password" name='password' placeholder="enter your password" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                    </div>
+                    <button className='w-full px-8 py-3 font-semibold rounded-md dark:bg-violet-400 '>Sign In</button>
+                    <h1 className='text-xl'>{error}</h1>
                 </form>
             </div>
         </div>

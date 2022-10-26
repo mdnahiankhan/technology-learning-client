@@ -48,10 +48,12 @@ const Header = () => {
                         </button></Link>
                         <button className="self-center px-8 py-3 ">
                             {user?.photoURL ?
-                                <img className='rounded-full h-10' src={user?.photoURL} alt="" /> : <FaUserAlt></FaUserAlt>
+                                <img className='rounded-full h-10' src={user?.photoURL} alt="" /> : <>
+                                    <FaUserAlt></FaUserAlt>
+                                </>
                             }
                         </button>
-                        <Link to='/register'><button className='self-center px-8 py-3 rounded font-semibold  dark:bg-violet-400 dark:text-gray-900'>Sign Up</button></Link>
+                        <Link to='/register'><button className='ml-5 self-center px-8 py-3 rounded font-semibold  dark:bg-violet-400 dark:text-gray-900'>Sign Up</button></Link>
                     </div>
                     <button className="p-4 lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-gray-100">
