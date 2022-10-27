@@ -6,25 +6,38 @@ import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
     const [error, setError] = useState('')
-    const { createUser } = useContext(AuthContext)
+    const { createUser, UpdateUserProfile } = useContext(AuthContext)
     const handleSubmit = event => {
         event.preventDefault();
         const name = event.target.name.value;
-        const imgUrl = event.target.imgUrl.value;
+        const photoURL = event.target.photoURL.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
-        console.log(name, imgUrl, email, password);
+
         createUser(email, password)
             .then(result => {
                 const user = result.user
                 console.log(user);
                 setError('')
                 event.target.reset();
+                handleuserProfile(name, photoURL)
+
             })
             .catch(error => {
                 console.error(error)
                 setError(error.message)
-            })
+            });
+
+        const handleuserProfile = (name, photoURL) => {
+            const profile = {
+                displayName: name,
+                photoURL: photoURL
+            }
+            UpdateUserProfile(profile)
+                .then(() => { })
+                .catch(error => console.error(error))
+        }
+
     }
     return (
         <div>
@@ -40,7 +53,7 @@ const Register = () => {
                     </div>
                     <div>
                         <label htmlFor="">Img Url</label>
-                        <input type="text" name='imgUrl' placeholder="Enter Your ImgUrl" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
+                        <input type="text" name='photoURL' placeholder="Enter Your ImgUrl" className="w-full px-3 py-2 border rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400" />
                     </div>
                     <div>
                         <label htmlFor="">Enter Your email</label>
