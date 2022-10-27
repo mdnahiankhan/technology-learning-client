@@ -28,10 +28,10 @@ const Header = () => {
                             <Link to='/' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent ">Courses</Link>
                         </li>
                         <li className="flex">
-                            <Link rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Faq</Link>
+                            <Link to='faq' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Faq</Link>
                         </li>
                         <li className="flex">
-                            <Link rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Blog</Link>
+                            <Link to='/blog' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Blog</Link>
                         </li>
                         <li className="flex">
                             <Link rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Toogle</Link>
