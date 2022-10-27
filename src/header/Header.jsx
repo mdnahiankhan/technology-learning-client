@@ -28,13 +28,21 @@ const Header = () => {
                             <Link to='/' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent ">Courses</Link>
                         </li>
                         <li className="flex">
-                            <Link to='faq' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Faq</Link>
+                            <Link to='/faq' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Faq</Link>
                         </li>
                         <li className="flex">
                             <Link to='/blog' rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Blog</Link>
                         </li>
                         <li className="flex">
-                            <Link rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent">Toogle</Link>
+                            {/* <Link rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"></Link> */}
+                            <label for="Toggle1" className="inline-flex items-center space-x-4 cursor-pointer dark:text-gray-100">
+                                <span className="relative">
+                                    <input id="Toggle1" type="checkbox" className="hidden peer" />
+                                    <div className="w-10 h-6 rounded-full shadow-inner dark:bg-gray-400 peer-checked:dark:bg-violet-400"></div>
+                                    <div className="absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full shadow peer-checked:right-0 peer-checked:left-auto dark:bg-gray-800"></div>
+                                </span>
+
+                            </label>
                         </li>
                     </ul>
                     <div className="items-center flex-shrink-0 hidden lg:flex">
@@ -48,12 +56,12 @@ const Header = () => {
                         </button></Link>
                         <button className="self-center px-8 py-3 ">
                             {user?.photoURL ?
-                                <img className='rounded-full h-10' src={user?.photoURL} alt="" /> : <>
+                                <img className='rounded-full h-10' src={user?.photoURL} title={user.displayName} alt="" /> : <>
                                     <FaUserAlt></FaUserAlt>
                                 </>
                             }
                         </button>
-                        <Link to='/register'><button className='ml-5 self-center px-8 py-3 rounded font-semibold  dark:bg-violet-400 dark:text-gray-900'>Sign Up</button></Link>
+
                     </div>
                     <button className="p-4 lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-gray-100">

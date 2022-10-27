@@ -6,7 +6,7 @@ const Category = () => {
     const courseCategory = useLoaderData();
     return (
         <div>
-            <h1 className='font-semibold mt-2'>This category has course:{courseCategory.length}</h1>
+            <h1 className='font-semibold text-center mt-2'>This category has course:{courseCategory.length}</h1>
             <div className='mt-4 justify-items-center'>
                 {
                     courseCategory.map(courses => <ShowCourse

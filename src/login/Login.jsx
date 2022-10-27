@@ -1,4 +1,4 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
@@ -8,10 +8,10 @@ import { AuthContext } from '../contexts/AuthProvider/AuthProvider';
 const Login = () => {
     const [error, setError] = useState('')
 
-    const { googleLogin, SigninUser } = useContext(AuthContext);
+    const { googleLogin, SigninUser, githubLogin } = useContext(AuthContext);
     const navigate = useNavigate()
     const googleprovider = new GoogleAuthProvider()
-
+    const githubprovider = new GithubAuthProvider()
     const location = useLocation();
     const from = location.state?.from?.pathname || '/'
 
@@ -21,6 +21,18 @@ const Login = () => {
                 const user = result.user
                 console.log(user);
                 navigate('/');
+            })
+            .catch(error => {
+                console.error(error)
+                setError(error.message)
+            })
+    }
+    const handleGithubsignin = () => {
+        githubLogin(githubprovider)
+            .then(result => {
+                const user = result.user
+                console.log(user);
+                navigate('/')
             })
             .catch(error => {
                 console.error(error)
@@ -58,7 +70,7 @@ const Login = () => {
                         </svg>
                         <p>Login with Google</p>
                     </button>
-                    <button aria-label="Login with GitHub" type='button' className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400">
+                    <button onClick={handleGithubsignin} aria-label="Login with GitHub" type='button' className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-400 focus:ring-violet-400">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="w-5 h-5 fill-current">
                         </svg>
                         <p>Login with GitHub</p>
